@@ -1417,7 +1417,7 @@ END GROUP
                 0x18004000                __top_RamM0Sub16 = 0x18004000
                 0x18004800                __top_RamM0Sub2 = 0x18004800
 
-.text           0x10000000     0x4798
+.text           0x10000000     0x47f0
  FILL mask 0xff
                 0x10000000                __vectors_start__ = ABSOLUTE (.)
  *(.isr_vector)
@@ -1426,30 +1426,30 @@ END GROUP
                 0x10000114                . = ALIGN (0x4)
                 0x10000114                __section_table_start = .
                 0x10000114                __data_section_table = .
-                0x10000114        0x4 LONG 0x10004798 LOADADDR (.data)
-                0x10000118        0x4 LONG 0x10004798 ADDR (.data)
+                0x10000114        0x4 LONG 0x100047f0 LOADADDR (.data)
+                0x10000118        0x4 LONG 0x100047f0 ADDR (.data)
                 0x1000011c        0x4 LONG 0xe4 SIZEOF (.data)
-                0x10000120        0x4 LONG 0x10004798 LOADADDR (.data_RAM2)
+                0x10000120        0x4 LONG 0x100047f0 LOADADDR (.data_RAM2)
                 0x10000124        0x4 LONG 0x10080000 ADDR (.data_RAM2)
                 0x10000128        0x4 LONG 0x0 SIZEOF (.data_RAM2)
-                0x1000012c        0x4 LONG 0x10004798 LOADADDR (.data_RAM3)
+                0x1000012c        0x4 LONG 0x100047f0 LOADADDR (.data_RAM3)
                 0x10000130        0x4 LONG 0x20000000 ADDR (.data_RAM3)
                 0x10000134        0x4 LONG 0x0 SIZEOF (.data_RAM3)
-                0x10000138        0x4 LONG 0x10004798 LOADADDR (.data_RAM4)
+                0x10000138        0x4 LONG 0x100047f0 LOADADDR (.data_RAM4)
                 0x1000013c        0x4 LONG 0x20008000 ADDR (.data_RAM4)
                 0x10000140        0x4 LONG 0x0 SIZEOF (.data_RAM4)
-                0x10000144        0x4 LONG 0x10004798 LOADADDR (.data_RAM5)
+                0x10000144        0x4 LONG 0x100047f0 LOADADDR (.data_RAM5)
                 0x10000148        0x4 LONG 0x2000c000 ADDR (.data_RAM5)
                 0x1000014c        0x4 LONG 0x0 SIZEOF (.data_RAM5)
-                0x10000150        0x4 LONG 0x10004798 LOADADDR (.data_RAM6)
+                0x10000150        0x4 LONG 0x100047f0 LOADADDR (.data_RAM6)
                 0x10000154        0x4 LONG 0x18000000 ADDR (.data_RAM6)
                 0x10000158        0x4 LONG 0x0 SIZEOF (.data_RAM6)
-                0x1000015c        0x4 LONG 0x10004798 LOADADDR (.data_RAM7)
+                0x1000015c        0x4 LONG 0x100047f0 LOADADDR (.data_RAM7)
                 0x10000160        0x4 LONG 0x18004000 ADDR (.data_RAM7)
                 0x10000164        0x4 LONG 0x0 SIZEOF (.data_RAM7)
                 0x10000168                __data_section_table_end = .
                 0x10000168                __bss_section_table = .
-                0x10000168        0x4 LONG 0x1000487c ADDR (.bss)
+                0x10000168        0x4 LONG 0x100048d4 ADDR (.bss)
                 0x1000016c        0x4 LONG 0x201c SIZEOF (.bss)
                 0x10000170        0x4 LONG 0x10080000 ADDR (.bss_RAM2)
                 0x10000174        0x4 LONG 0x0 SIZEOF (.bss_RAM2)
@@ -1467,7 +1467,7 @@ END GROUP
                 0x100001a0                __section_table_end = .
  *(.after_vectors*)
  .after_vectors
-                0x100001a0       0x58 ./src/cr_startup_lpc43xx.o
+                0x100001a0       0x50 ./src/cr_startup_lpc43xx.o
                 0x100001a0                NMI_Handler
                 0x100001a4                HardFault_Handler
                 0x100001a8                MemManage_Handler
@@ -1529,9 +1529,9 @@ END GROUP
                 0x100001c4                UART3_IRQHandler
                 0x100001c4                GPIO4_IRQHandler
                 0x100001c8                data_init
-                0x100001e4                bss_init
+                0x100001e0                bss_init
                 0x000002fc                . = 0x2fc
- *fill*         0x100001f8      0x104 ff
+ *fill*         0x100001f0      0x10c ff
                 0x100002fc                PROVIDE (__CRP_WORD_START__, .)
  *(.crp)
  .crp           0x100002fc        0x4 ./src/crp.o
@@ -1539,147 +1539,148 @@ END GROUP
                 0x10000300                PROVIDE (__CRP_WORD_END__, .)
                 0x00000001                ASSERT (! ((__CRP_WORD_START__ == __CRP_WORD_END__)), Linker CRP Enabled, but no CRP_WORD provided within application)
  *(.text*)
- .text.main     0x10000300       0x54 ./src/FFT_SPEED.o
+ .text.startup.main
+                0x10000300       0x50 ./src/FFT_SPEED.o
                 0x10000300                main
  .text.ResetISR
-                0x10000354       0x80 ./src/cr_startup_lpc43xx.o
-                0x10000354                ResetISR
+                0x10000350       0xe0 ./src/cr_startup_lpc43xx.o
+                0x10000350                ResetISR
  .text.SystemInit
-                0x100003d4       0x18 ./src/sysinit.o
-                0x100003d4                SystemInit
+                0x10000430       0x14 ./src/sysinit.o
+                0x10000430                SystemInit
  .text.Board_LED_Init
-                0x100003ec       0x18 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+                0x10000444       0x18 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
  .text.Board_UART_Init
-                0x10000404       0x2c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
-                0x10000404                Board_UART_Init
+                0x1000045c       0x2c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+                0x1000045c                Board_UART_Init
  .text.Board_Debug_Init
-                0x10000430       0x28 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
-                0x10000430                Board_Debug_Init
+                0x10000488       0x28 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+                0x10000488                Board_Debug_Init
  .text.Board_LED_Set
-                0x10000458        0xc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
-                0x10000458                Board_LED_Set
+                0x100004b0        0xc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+                0x100004b0                Board_LED_Set
  .text.Board_LED_Test
-                0x10000464       0x1c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
-                0x10000464                Board_LED_Test
+                0x100004bc       0x1c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+                0x100004bc                Board_LED_Test
  .text.Board_LED_Toggle
-                0x10000480       0x18 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
-                0x10000480                Board_LED_Toggle
+                0x100004d8       0x18 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+                0x100004d8                Board_LED_Toggle
  .text.Board_Init
-                0x10000498       0x18 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
-                0x10000498                Board_Init
+                0x100004f0       0x18 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+                0x100004f0                Board_Init
  .text.arm_cfft_radix4_init_q15
-                0x100004b0       0x94 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
-                0x100004b0                arm_cfft_radix4_init_q15
+                0x10000508       0x94 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
+                0x10000508                arm_cfft_radix4_init_q15
  .text.arm_radix4_butterfly_q15
-                0x10000544      0x2bc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
-                0x10000544                arm_radix4_butterfly_q15
+                0x1000059c      0x2bc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
+                0x1000059c                arm_radix4_butterfly_q15
  .text.arm_radix4_butterfly_inverse_q15
-                0x10000800      0x2bc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
-                0x10000800                arm_radix4_butterfly_inverse_q15
+                0x10000858      0x2bc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
+                0x10000858                arm_radix4_butterfly_inverse_q15
  .text.arm_cfft_radix4_q15
-                0x10000abc       0x3c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
-                0x10000abc                arm_cfft_radix4_q15
+                0x10000b14       0x3c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
+                0x10000b14                arm_cfft_radix4_q15
  .text.arm_bitreversal_q15
-                0x10000af8       0x68 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
-                0x10000af8                arm_bitreversal_q15
+                0x10000b50       0x68 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
+                0x10000b50                arm_bitreversal_q15
  .text.SystemCoreClockUpdate
-                0x10000b60       0x14 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
-                0x10000b60                SystemCoreClockUpdate
+                0x10000bb8       0x14 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
+                0x10000bb8                SystemCoreClockUpdate
  .text.Chip_Clock_FindBaseClock
-                0x10000b74       0x48 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000bcc       0x48 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
  .text.Chip_Clock_GetDividerSource
-                0x10000bbc       0x1c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
-                0x10000bbc                Chip_Clock_GetDividerSource
+                0x10000c14       0x1c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000c14                Chip_Clock_GetDividerSource
  .text.Chip_Clock_GetDividerDivisor
-                0x10000bd8       0x1c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
-                0x10000bd8                Chip_Clock_GetDividerDivisor
+                0x10000c30       0x1c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000c30                Chip_Clock_GetDividerDivisor
  .text.Chip_Clock_GetClockInputHz
-                0x10000bf4       0xb8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
-                0x10000bf4                Chip_Clock_GetClockInputHz
+                0x10000c4c       0xb8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000c4c                Chip_Clock_GetClockInputHz
  .text.Chip_Clock_GetMainPLLHz
-                0x10000cac       0x68 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
-                0x10000cac                Chip_Clock_GetMainPLLHz
+                0x10000d04       0x68 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000d04                Chip_Clock_GetMainPLLHz
  .text.Chip_Clock_GetDivRate
-                0x10000d14       0x24 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000d6c       0x24 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
  .text.Chip_Clock_GetBaseClock
-                0x10000d38       0x24 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
-                0x10000d38                Chip_Clock_GetBaseClock
+                0x10000d90       0x24 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000d90                Chip_Clock_GetBaseClock
  .text.Chip_Clock_GetBaseClocktHz
-                0x10000d5c        0xc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
-                0x10000d5c                Chip_Clock_GetBaseClocktHz
+                0x10000db4        0xc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000db4                Chip_Clock_GetBaseClocktHz
  .text.Chip_Clock_EnableOpts
-                0x10000d68       0x34 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
-                0x10000d68                Chip_Clock_EnableOpts
+                0x10000dc0       0x34 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000dc0                Chip_Clock_EnableOpts
  .text.Chip_Clock_GetRate
-                0x10000d9c       0x44 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
-                0x10000d9c                Chip_Clock_GetRate
- .text.fpuInit  0x10000de0       0x58 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
-                0x10000de0                fpuInit
+                0x10000df4       0x44 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10000df4                Chip_Clock_GetRate
+ .text.fpuInit  0x10000e38       0x58 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
+                0x10000e38                fpuInit
  .text.Chip_GPIO_Init
-                0x10000e38        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
-                0x10000e38                Chip_GPIO_Init
+                0x10000e90        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
+                0x10000e90                Chip_GPIO_Init
  .text.Chip_UART_GetClockIndex
-                0x10000e3c       0x28 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
+                0x10000e94       0x28 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
  .text.Chip_UART_Init
-                0x10000e64       0x40 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
-                0x10000e64                Chip_UART_Init
+                0x10000ebc       0x40 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
+                0x10000ebc                Chip_UART_Init
  .text.Chip_UART_SetBaud
-                0x10000ea4       0x34 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
-                0x10000ea4                Chip_UART_SetBaud
+                0x10000efc       0x34 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
+                0x10000efc                Chip_UART_SetBaud
  .text.__weak_main
-                0x10000ed8        0x4 c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(__weak__main.o)
-                0x10000ed8                __weak_main
-                0x10000ed8                __main
- .text.rand     0x10000edc       0x3c c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(stdlib.o)
-                0x10000edc                rand
+                0x10000f30        0x4 c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(__weak__main.o)
+                0x10000f30                __weak_main
+                0x10000f30                __main
+ .text.rand     0x10000f34       0x3c c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(stdlib.o)
+                0x10000f34                rand
  *(.rodata .rodata.* .constdata .constdata.*)
  .rodata.OscRateIn
-                0x10000f18        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
-                0x10000f18                OscRateIn
+                0x10000f70        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+                0x10000f70                OscRateIn
  .rodata.ExtRateIn
-                0x10000f1c        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
-                0x10000f1c                ExtRateIn
+                0x10000f74        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+                0x10000f74                ExtRateIn
  .rodata.twiddleCoefQ15
-                0x10000f20     0x3000 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
-                0x10000f20                twiddleCoefQ15
+                0x10000f78     0x3000 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
+                0x10000f78                twiddleCoefQ15
  .rodata.armBitRevTable
-                0x10003f20      0x800 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
-                0x10003f20                armBitRevTable
- .rodata        0x10004720        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x10003f78      0x800 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
+                0x10003f78                armBitRevTable
+ .rodata        0x10004778        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
  .rodata.str1.4
-                0x10004724        0x8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x1000477c        0x8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
  .rodata.periph_to_base
-                0x1000472c       0x6c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
-                0x10004798                . = ALIGN (0x4)
+                0x10004784       0x6c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x100047f0                . = ALIGN (0x4)
 
-.glue_7         0x10004798        0x0
+.glue_7         0x100047f0        0x0
  .glue_7        0x00000000        0x0 linker stubs
 
-.glue_7t        0x10004798        0x0
+.glue_7t        0x100047f0        0x0
  .glue_7t       0x00000000        0x0 linker stubs
 
-.vfp11_veneer   0x10004798        0x0
+.vfp11_veneer   0x100047f0        0x0
  .vfp11_veneer  0x00000000        0x0 linker stubs
 
-.v4_bx          0x10004798        0x0
+.v4_bx          0x100047f0        0x0
  .v4_bx         0x00000000        0x0 linker stubs
 
-.iplt           0x10004798        0x0
+.iplt           0x100047f0        0x0
  .iplt          0x00000000        0x0 ./src/FFT_SPEED.o
 
-.rel.dyn        0x10004798        0x0
+.rel.dyn        0x100047f0        0x0
  .rel.iplt      0x00000000        0x0 ./src/FFT_SPEED.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
-                0x10004798                __exidx_start = .
+                0x100047f0                __exidx_start = .
 
 .ARM.exidx
  *(.ARM.exidx* .gnu.linkonce.armexidx.*)
-                0x10004798                __exidx_end = .
-                0x10004798                _etext = .
+                0x100047f0                __exidx_end = .
+                0x100047f0                _etext = .
 
-.data_RAM2      0x10080000        0x0 load address 0x10004798
+.data_RAM2      0x10080000        0x0 load address 0x100047f0
  FILL mask 0xff
  *(.ramfunc.$RAM2)
  *(.ramfunc.$RamLoc72)
@@ -1687,7 +1688,7 @@ END GROUP
  *(.data.$RamLoc72*)
                 0x10080000                . = ALIGN (0x4)
 
-.data_RAM3      0x20000000        0x0 load address 0x10004798
+.data_RAM3      0x20000000        0x0 load address 0x100047f0
  FILL mask 0xff
  *(.ramfunc.$RAM3)
  *(.ramfunc.$RamAHB32)
@@ -1695,7 +1696,7 @@ END GROUP
  *(.data.$RamAHB32*)
                 0x20000000                . = ALIGN (0x4)
 
-.data_RAM4      0x20008000        0x0 load address 0x10004798
+.data_RAM4      0x20008000        0x0 load address 0x100047f0
  FILL mask 0xff
  *(.ramfunc.$RAM4)
  *(.ramfunc.$RamAHB16)
@@ -1703,7 +1704,7 @@ END GROUP
  *(.data.$RamAHB16*)
                 0x20008000                . = ALIGN (0x4)
 
-.data_RAM5      0x2000c000        0x0 load address 0x10004798
+.data_RAM5      0x2000c000        0x0 load address 0x100047f0
  FILL mask 0xff
  *(.ramfunc.$RAM5)
  *(.ramfunc.$RamAHB_ETB16)
@@ -1711,7 +1712,7 @@ END GROUP
  *(.data.$RamAHB_ETB16*)
                 0x2000c000                . = ALIGN (0x4)
 
-.data_RAM6      0x18000000        0x0 load address 0x10004798
+.data_RAM6      0x18000000        0x0 load address 0x100047f0
  FILL mask 0xff
  *(.ramfunc.$RAM6)
  *(.ramfunc.$RamM0Sub16)
@@ -1719,7 +1720,7 @@ END GROUP
  *(.data.$RamM0Sub16*)
                 0x18000000                . = ALIGN (0x4)
 
-.data_RAM7      0x18004000        0x0 load address 0x10004798
+.data_RAM7      0x18004000        0x0 load address 0x100047f0
  FILL mask 0xff
  *(.ramfunc.$RAM7)
  *(.ramfunc.$RamM0Sub2)
@@ -1728,27 +1729,27 @@ END GROUP
                 0x18004000                . = ALIGN (0x4)
 
 .uninit_RESERVED
-                0x10004798        0x0
+                0x100047f0        0x0
  *(.bss.$RESERVED*)
-                0x10004798                . = ALIGN (0x4)
-                0x10004798                _end_uninit_RESERVED = .
+                0x100047f0                . = ALIGN (0x4)
+                0x100047f0                _end_uninit_RESERVED = .
 
-.data           0x10004798       0xe4
+.data           0x100047f0       0xe4
  FILL mask 0xff
-                0x10004798                _data = .
+                0x100047f0                _data = .
  *(vtable)
  *(.ramfunc*)
  *(.data*)
  .data._random_number_seed
-                0x10004798       0xdc c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(stdlib.o)
+                0x100047f0       0xdc c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(stdlib.o)
  .data._random_j
-                0x10004874        0x4 c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(stdlib.o)
+                0x100048cc        0x4 c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(stdlib.o)
  .data._random_k
-                0x10004878        0x4 c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(stdlib.o)
-                0x1000487c                . = ALIGN (0x4)
-                0x1000487c                _edata = .
+                0x100048d0        0x4 c:/nxp/lpcxpresso_7.2.0_153/lpcxpresso/tools/bin/../lib/gcc/arm-none-eabi/4.8.3/../../../../arm-none-eabi/lib/armv7e-m/softfp\libcr_c.a(stdlib.o)
+                0x100048d4                . = ALIGN (0x4)
+                0x100048d4                _edata = .
 
-.igot.plt       0x1000487c        0x0
+.igot.plt       0x100048d4        0x0
  .igot.plt      0x00000000        0x0 ./src/FFT_SPEED.o
 
 .bss_RAM2       0x10080000        0x0
@@ -1781,20 +1782,20 @@ END GROUP
  *(.bss.$RamM0Sub2*)
                 0x18004000                . = ALIGN (0x4)
 
-.bss            0x1000487c     0x201c
-                0x1000487c                _bss = .
+.bss            0x100048d4     0x201c
+                0x100048d4                _bss = .
  *(.bss*)
  .bss.audio_usb_pll_freq
-                0x1000487c        0x8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+                0x100048d4        0x8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
  *(COMMON)
- COMMON         0x10004884     0x2010 ./src/FFT_SPEED.o
-                0x10004884                MyCFFT
-                0x10004894                InputData
- COMMON         0x10006894        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
-                0x10006894                SystemCoreClock
-                0x10006898                . = ALIGN (0x4)
-                0x10006898                _ebss = .
-                0x10006898                PROVIDE (end, .)
+ COMMON         0x100048dc     0x2010 ./src/FFT_SPEED.o
+                0x100048dc                MyCFFT
+                0x100048ec                InputData
+ COMMON         0x100068ec        0x4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
+                0x100068ec                SystemCoreClock
+                0x100068f0                . = ALIGN (0x4)
+                0x100068f0                _ebss = .
+                0x100068f0                PROVIDE (end, .)
 
 .noinit_RAM2    0x10080000        0x0
  *(.noinit.$RAM2*)
@@ -1826,58 +1827,58 @@ END GROUP
  *(.noinit.$RamM0Sub2*)
                 0x18004000                . = ALIGN (0x4)
 
-.noinit         0x10006898        0x0
-                0x10006898                _noinit = .
+.noinit         0x100068f0        0x0
+                0x100068f0                _noinit = .
  *(.noinit*)
-                0x10006898                . = ALIGN (0x4)
-                0x10006898                _end_noinit = .
-                0x10006898                PROVIDE (_pvHeapStart, .)
+                0x100068f0                . = ALIGN (0x4)
+                0x100068f0                _end_noinit = .
+                0x100068f0                PROVIDE (_pvHeapStart, .)
                 0x10020000                PROVIDE (_vStackTop, (__top_RamLoc128 - 0x0))
 OUTPUT(FFT_SPEED.axf elf32-littlearm)
 
-.debug_info     0x00000000     0x7fda
- .debug_info    0x00000000      0x7d3 ./src/FFT_SPEED.o
- .debug_info    0x000007d3      0x2d2 ./src/cr_startup_lpc43xx.o
- .debug_info    0x00000aa5       0x3f ./src/crp.o
- .debug_info    0x00000ae4       0xfc ./src/sysinit.o
- .debug_info    0x00000be0     0x12eb C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
- .debug_info    0x00001ecb      0x20f C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
- .debug_info    0x000020da     0x1865 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
- .debug_info    0x0000393f      0x576 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
- .debug_info    0x00003eb5      0x2ab C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
- .debug_info    0x00004160      0xcb6 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
- .debug_info    0x00004e16     0x15d4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
- .debug_info    0x000063ea      0x12f C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
- .debug_info    0x00006519      0x49b C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
- .debug_info    0x000069b4     0x1626 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
+.debug_info     0x00000000     0x80a1
+ .debug_info    0x00000000      0x7d8 ./src/FFT_SPEED.o
+ .debug_info    0x000007d8      0x394 ./src/cr_startup_lpc43xx.o
+ .debug_info    0x00000b6c       0x3f ./src/crp.o
+ .debug_info    0x00000bab       0xfc ./src/sysinit.o
+ .debug_info    0x00000ca7     0x12eb C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+ .debug_info    0x00001f92      0x20f C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
+ .debug_info    0x000021a1     0x1865 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
+ .debug_info    0x00003a06      0x576 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
+ .debug_info    0x00003f7c      0x2ab C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
+ .debug_info    0x00004227      0xcb6 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
+ .debug_info    0x00004edd     0x15d4 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+ .debug_info    0x000064b1      0x12f C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
+ .debug_info    0x000065e0      0x49b C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
+ .debug_info    0x00006a7b     0x1626 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
 
-.debug_abbrev   0x00000000     0x161a
+.debug_abbrev   0x00000000     0x16a7
  .debug_abbrev  0x00000000      0x1be ./src/FFT_SPEED.o
- .debug_abbrev  0x000001be      0x10d ./src/cr_startup_lpc43xx.o
- .debug_abbrev  0x000002cb       0x36 ./src/crp.o
- .debug_abbrev  0x00000301       0xb8 ./src/sysinit.o
- .debug_abbrev  0x000003b9      0x360 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
- .debug_abbrev  0x00000719      0x104 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
- .debug_abbrev  0x0000081d      0x204 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
- .debug_abbrev  0x00000a21       0x87 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
- .debug_abbrev  0x00000aa8       0xcd C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
- .debug_abbrev  0x00000b75      0x1f6 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
- .debug_abbrev  0x00000d6b      0x2e5 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
- .debug_abbrev  0x00001050       0xa2 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
- .debug_abbrev  0x000010f2      0x14b C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
- .debug_abbrev  0x0000123d      0x3dd C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
+ .debug_abbrev  0x000001be      0x197 ./src/cr_startup_lpc43xx.o
+ .debug_abbrev  0x00000355       0x36 ./src/crp.o
+ .debug_abbrev  0x0000038b       0xbb ./src/sysinit.o
+ .debug_abbrev  0x00000446      0x360 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+ .debug_abbrev  0x000007a6      0x104 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
+ .debug_abbrev  0x000008aa      0x204 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
+ .debug_abbrev  0x00000aae       0x87 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
+ .debug_abbrev  0x00000b35       0xcd C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
+ .debug_abbrev  0x00000c02      0x1f6 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
+ .debug_abbrev  0x00000df8      0x2e5 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+ .debug_abbrev  0x000010dd       0xa2 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
+ .debug_abbrev  0x0000117f      0x14b C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
+ .debug_abbrev  0x000012ca      0x3dd C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
 
-.debug_loc      0x00000000     0x4efb
- .debug_loc     0x00000000       0x1f ./src/FFT_SPEED.o
- .debug_loc     0x0000001f      0x1f0 ./src/cr_startup_lpc43xx.o
- .debug_loc     0x0000020f      0x39a C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
- .debug_loc     0x000005a9      0x19d C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
- .debug_loc     0x00000746     0x26af C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
- .debug_loc     0x00002df5      0x333 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
- .debug_loc     0x00003128      0xee3 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
- .debug_loc     0x0000400b       0x1f C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
- .debug_loc     0x0000402a      0x3cf C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
- .debug_loc     0x000043f9      0xb02 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
+.debug_loc      0x00000000     0x500f
+ .debug_loc     0x00000000       0x14 ./src/FFT_SPEED.o
+ .debug_loc     0x00000014      0x30f ./src/cr_startup_lpc43xx.o
+ .debug_loc     0x00000323      0x39a C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+ .debug_loc     0x000006bd      0x19d C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
+ .debug_loc     0x0000085a     0x26af C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
+ .debug_loc     0x00002f09      0x333 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
+ .debug_loc     0x0000323c      0xee3 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+ .debug_loc     0x0000411f       0x1f C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
+ .debug_loc     0x0000413e      0x3cf C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
+ .debug_loc     0x0000450d      0xb02 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
 
 .debug_aranges  0x00000000      0x498
  .debug_aranges
@@ -1909,19 +1910,19 @@ OUTPUT(FFT_SPEED.axf elf32-littlearm)
  .debug_aranges
                 0x000003f0       0xa8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
 
-.debug_ranges   0x00000000      0x3c8
+.debug_ranges   0x00000000      0x3e0
  .debug_ranges  0x00000000       0x10 ./src/FFT_SPEED.o
- .debug_ranges  0x00000010       0x70 ./src/cr_startup_lpc43xx.o
- .debug_ranges  0x00000080       0x10 ./src/sysinit.o
- .debug_ranges  0x00000090       0xa8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
- .debug_ranges  0x00000138       0x10 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
- .debug_ranges  0x00000148       0x20 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
- .debug_ranges  0x00000168       0x20 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
- .debug_ranges  0x00000188       0x28 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
- .debug_ranges  0x000001b0      0x118 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
- .debug_ranges  0x000002c8       0x10 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
- .debug_ranges  0x000002d8       0x38 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
- .debug_ranges  0x00000310       0xb8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
+ .debug_ranges  0x00000010       0x88 ./src/cr_startup_lpc43xx.o
+ .debug_ranges  0x00000098       0x10 ./src/sysinit.o
+ .debug_ranges  0x000000a8       0xa8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+ .debug_ranges  0x00000150       0x10 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
+ .debug_ranges  0x00000160       0x20 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
+ .debug_ranges  0x00000180       0x20 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
+ .debug_ranges  0x000001a0       0x28 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
+ .debug_ranges  0x000001c8      0x118 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+ .debug_ranges  0x000002e0       0x10 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
+ .debug_ranges  0x000002f0       0x38 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
+ .debug_ranges  0x00000328       0xb8 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
 
 .debug_macro    0x00000000     0x724a
  .debug_macro   0x00000000      0x355 ./src/FFT_SPEED.o
@@ -2004,23 +2005,23 @@ OUTPUT(FFT_SPEED.axf elf32-littlearm)
  .debug_macro   0x00006caa      0x2d0 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
  .debug_macro   0x00006f7a      0x2d0 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
 
-.debug_line     0x00000000     0x466a
- .debug_line    0x00000000      0x758 ./src/FFT_SPEED.o
- .debug_line    0x00000758       0xd3 ./src/cr_startup_lpc43xx.o
- .debug_line    0x0000082b       0x78 ./src/crp.o
- .debug_line    0x000008a3      0x6a3 ./src/sysinit.o
- .debug_line    0x00000f46      0x83d C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
- .debug_line    0x00001783      0x226 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
- .debug_line    0x000019a9      0x828 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
- .debug_line    0x000021d1      0x1d5 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
- .debug_line    0x000023a6      0x285 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
- .debug_line    0x0000262b      0x621 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
- .debug_line    0x00002c4c      0x92c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
- .debug_line    0x00003578      0x1ee C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
- .debug_line    0x00003766      0x644 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
- .debug_line    0x00003daa      0x8c0 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
+.debug_line     0x00000000     0x4654
+ .debug_line    0x00000000      0x74c ./src/FFT_SPEED.o
+ .debug_line    0x0000074c       0xc9 ./src/cr_startup_lpc43xx.o
+ .debug_line    0x00000815       0x78 ./src/crp.o
+ .debug_line    0x0000088d      0x6a3 ./src/sysinit.o
+ .debug_line    0x00000f30      0x83d C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+ .debug_line    0x0000176d      0x226 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
+ .debug_line    0x00001993      0x828 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
+ .debug_line    0x000021bb      0x1d5 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
+ .debug_line    0x00002390      0x285 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
+ .debug_line    0x00002615      0x621 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
+ .debug_line    0x00002c36      0x92c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+ .debug_line    0x00003562      0x1ee C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
+ .debug_line    0x00003750      0x644 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
+ .debug_line    0x00003d94      0x8c0 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
 
-.debug_str      0x00000000    0x1856d
+.debug_str      0x00000000    0x1865b
  .debug_str     0x00000000    0x1635c ./src/FFT_SPEED.o
                               0x1647c (size before relaxing)
  .debug_str     0x0001635c      0x1f0 ./src/cr_startup_lpc43xx.o
@@ -2029,25 +2030,25 @@ OUTPUT(FFT_SPEED.axf elf32-littlearm)
                                0x2578 (size before relaxing)
  .debug_str     0x00016635       0x23 ./src/sysinit.o
                               0x14a98 (size before relaxing)
- .debug_str     0x00016658      0xa32 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
+ .debug_str     0x00016658      0xb20 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
                               0x15ebd (size before relaxing)
- .debug_str     0x0001708a      0x310 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
+ .debug_str     0x00017178      0x310 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
                                0x4e86 (size before relaxing)
- .debug_str     0x0001739a      0x123 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
+ .debug_str     0x00017488      0x123 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
                                0x4cb1 (size before relaxing)
- .debug_str     0x000174bd      0x281 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
+ .debug_str     0x000175ab      0x281 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_common_tables.o)
                                0x4fc0 (size before relaxing)
- .debug_str     0x0001773e       0x7d C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
+ .debug_str     0x0001782c       0x7d C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_bitreversal.o)
                                0x4de1 (size before relaxing)
- .debug_str     0x000177bb      0x3cc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
+ .debug_str     0x000178a9      0x3cc C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(chip_18xx_43xx.o)
                               0x15a7f (size before relaxing)
- .debug_str     0x00017b87      0x4be C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
+ .debug_str     0x00017c75      0x4be C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(clock_18xx_43xx.o)
                               0x15e9d (size before relaxing)
- .debug_str     0x00018045       0xad C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
+ .debug_str     0x00018133       0xad C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(fpu_init.o)
                                0x9849 (size before relaxing)
- .debug_str     0x000180f2       0xee C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
+ .debug_str     0x000181e0       0xee C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(gpio_18xx_43xx.o)
                               0x14d4c (size before relaxing)
- .debug_str     0x000181e0      0x38d C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
+ .debug_str     0x000182ce      0x38d C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_chip_43xx\Debug\liblpc_chip_43xx.a(uart_18xx_43xx.o)
                               0x15af3 (size before relaxing)
 
 .comment        0x00000000       0x70
@@ -2106,8 +2107,8 @@ OUTPUT(FFT_SPEED.axf elf32-littlearm)
 
 .debug_frame    0x00000000      0x994
  .debug_frame   0x00000000       0x2c ./src/FFT_SPEED.o
- .debug_frame   0x0000002c       0xf4 ./src/cr_startup_lpc43xx.o
- .debug_frame   0x00000120       0x28 ./src/sysinit.o
+ .debug_frame   0x0000002c       0xfc ./src/cr_startup_lpc43xx.o
+ .debug_frame   0x00000128       0x20 ./src/sysinit.o
  .debug_frame   0x00000148      0x184 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\lpc_board_nxp_lpclink2_4370\Debug\liblpc_board_nxp_lpclink2_4370.a(board.o)
  .debug_frame   0x000002cc       0x28 C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_init_q15.o)
  .debug_frame   0x000002f4       0x7c C:\Users\emh203\Documents\GitHub\hc-1\SRC\LPC-LINK-2\COMMON\CMSIS_DSP_4_0_1\Debug\libCMSIS_DSP_4_0_1.a(arm_cfft_radix4_q15.o)
